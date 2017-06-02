@@ -1,0 +1,28 @@
+<div class="content login">
+  <h1>Welcome</h1>
+  <%= form_for :user, url: login_login_path do |f| %>
+    <% if @error %>
+      <div class="validation-error">
+        <h2>Error logging in</h2>
+        <ul>
+          <li><%= @error %></li>
+        </ul>
+      </div>
+    <% end %>
+
+    <p>
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+    </p>
+
+    <p>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </p>
+
+    <p class="form-footer">
+      <%= link_to 'Register', new_user_path %>
+      <%= submit_tag("Log In") %>
+    </p>
+  <% end %>
+</div>

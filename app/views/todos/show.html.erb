@@ -1,0 +1,26 @@
+<div class="content todo-show">
+  <%= render 'todos/breadcrumbs', back: user_todos_path %>
+  <h1>ToDo Detail</h1>
+  <dl>
+    <div>
+      <dt>ID:</dt>
+      <dd><%= @todo.id %></dd>
+    </div>
+    <div>
+      <dt>Complete:</dt>
+      <dd><%= @todo.complete ? 'Yes' : 'No' %></dd>
+    </div>
+    <div>
+      <dt>Description:</dt>
+      <dd><%= @todo.description %></dd>
+    </div>
+    <div>
+      <dt>Created:</dt>
+      <dd><%= @todo.created_at %></dd>
+    </div>
+    <div>
+      <dt>Updated:</dt>
+      <dd><%= @todo.updated_at %></dd>
+    </div>
+  </dl>
+</div>

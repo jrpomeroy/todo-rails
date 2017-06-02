@@ -1,0 +1,35 @@
+<div class="content user-new">
+  <%= render 'todos/breadcrumbs', back: login_index_path %>
+  <h1>Register</h1>
+  <%= form_for :user, url: users_path do |f| %>
+    <% if @user.errors.any? %>
+      <div class="validation-error">
+        <h2>Error creating new user</h2>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <p>
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+    </p>
+
+    <p>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </p>
+
+    <p>
+      <%= f.label :password_confirmation, "Confirm password" %>
+      <%= f.password_field :password_confirmation %>
+    </p>
+
+    <p class="form-footer">
+      <%= f.submit "Register" %>
+    </p>
+  <% end %>
+</div>

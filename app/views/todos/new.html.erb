@@ -1,0 +1,25 @@
+<div class="content todo-new">
+  <%= render 'todos/breadcrumbs', back: user_todos_path %>
+  <h1>Create ToDo</h1>
+  <%= form_for([@user, @user.todos.build]) do |f| %>
+    <% if @todo.errors.any? %>
+      <div class="validation-error">
+        <h2>Error creating todo</h2>
+        <ul>
+          <% @todo.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <p>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </p>
+
+    <p class="form-footer">
+      <%= f.submit "Create" %>
+    </p>
+  <% end %>
+</div>

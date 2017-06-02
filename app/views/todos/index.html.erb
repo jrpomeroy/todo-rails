@@ -1,0 +1,24 @@
+<div class="content todo-index">
+  <h1>My ToDos</h1>
+
+  <% if @user.todos.any? %>
+    <div class="header-actions">
+      <%= link_to 'Create', new_user_todo_path(@user) %>
+    </div>
+
+    <% if @todos_open.any? %>
+      <%= render 'todos/todo_list', todos: @todos_open, item_class: '' %>
+    <% end %>
+
+    <% if @todos_closed.any? %>
+      <h3>Completed</h3>
+      <%= render 'todos/todo_list', todos: @todos_closed, item_class: 'complete' %>
+    <% end %>
+
+  <% else %>
+    <div class="todos-empty">
+      You have no todos!
+      <div><%= link_to 'Create One', new_user_todo_path(@user) %><div>
+    </div>
+  <% end %>
+</div>

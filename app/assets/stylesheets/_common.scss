@@ -1,0 +1,137 @@
+@import "vars";
+
+body {
+  color: $fg-color;
+  background-color: $bg-color;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+h1 {
+  border-bottom: 2px solid $fg-color;
+  padding-bottom: 2px;
+  margin: 0px 0px 10px 0px;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: $link-color;
+}
+a.danger {
+  color: $danger-color;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $fg-color;
+  padding: 10px;
+  color: $bg-color;
+  a, a:visited {
+    color: $bg-color;
+  }
+  .brand {
+    font-size: 1.2rem;
+  }
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  padding: 3px 5px;
+  border-radius: 0px;
+  border: 1px solid $light-gray;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+input[type="submit"],
+.header-actions a {
+  border-radius: 0px;
+  border: none;
+  background-color: $button-color;
+  color: $bg-color;
+  padding: 4px 6px;
+  font-size: 1rem;
+  &:hover, &:focus {
+    text-decoration: none;
+    background-color: darken($button-color, 10%);
+  }
+  &:active {
+    background-color: $button-color;
+  }
+}
+
+textarea {
+  height: 60px;
+}
+
+label {
+  display: block;
+}
+
+input[type="checkbox"] {
+  + label {
+    display: inline-block;
+  }
+}
+
+.content {
+  margin: 0px auto;
+  padding: 20px;
+  max-width: 500px;
+}
+
+.breadcrumbs {
+  margin-bottom: 10px;
+}
+
+.header-actions {
+  text-align: right;
+  padding-bottom: 8px;
+}
+
+.form-footer {
+  text-align: right;
+}
+
+.validation-error {
+  border: 1px solid $danger-color;
+  background-color: lighten($danger-color, 30%);
+  padding: 10px;
+  h2 {
+    margin: 0px;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  ul {
+    margin-bottom: 0px;
+  }
+}
+
+.field_with_errors {
+  label {
+    color: $danger-color;
+  }
+}
+
+dl > div:not(:first-child) {
+  margin-top: 10px;
+}
+dt {
+  font-weight: 600;
+}
+dd {
+  margin-top: 2px;
+}
+
+@media screen and (max-width: 750px) {
+  nav .welcome {
+    display: none;
+  }
+}

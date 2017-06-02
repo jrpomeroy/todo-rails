@@ -1,0 +1,39 @@
+<div class="content todo-edit">
+  <%= render 'todos/breadcrumbs', back: user_todos_path %>
+  <h1>Update ToDo</h1>
+  <%= form_for @todo, url: user_todo_path do |f| %>
+    <% if @todo.errors.any? %>
+      <div class="validation-error">
+        <h2>Error updating todo</h2>
+        <ul>
+          <% @todo.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <p>
+      <%= f.check_box :complete, :value => @todo.complete %>
+      <%= f.label :complete %>
+    </p>
+
+    <p>
+      <%= f.label :description %>
+      <%= f.text_area :description, :value => @todo.description %>
+    </p>
+
+    <p>
+      <%= f.label :user_id, "Assigned to" %>
+      <%= f.select :user_id do %>
+        <% @users.each do |user| -%>
+          <%= content_tag(:option, user.username, value: user.id, selected: user.id == @todo.user_id) %>
+        <% end %>
+      <% end %>
+    </p>
+
+    <p class="form-footer">
+      <%= f.submit "Update" %>
+    </p>
+  <% end %>
+</div>
