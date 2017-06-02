@@ -42,12 +42,14 @@ nav {
 
 input[type="text"],
 input[type="password"],
-textarea {
+textarea,
+select {
   padding: 3px 5px;
   border-radius: 0px;
   border: 1px solid $light-gray;
   box-sizing: border-box;
   width: 100%;
+  background-color: #ffffff;
 }
 
 input[type="submit"],

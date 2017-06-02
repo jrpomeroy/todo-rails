@@ -1,6 +1,15 @@
 <div class="content login">
   <h1>Welcome</h1>
   <%= form_for :user, url: login_login_path do |f| %>
+    <% if flash[:notice] %>
+      <div class="validation-error">
+        <h2>Authorization failed</h2>
+        <ul>
+          <li><%= flash[:notice] %></li>
+        </ul>
+      </div>
+    <% end %>
+
     <% if @error %>
       <div class="validation-error">
         <h2>Error logging in</h2>

@@ -1,6 +1,7 @@
 class TodosController < ApplicationController
+  before_action :is_authorized
+
   def index
-    validate_session
     @user = User.find(params[:user_id])
     if is_json
       render json: @user.todos
@@ -11,20 +12,17 @@ class TodosController < ApplicationController
   end
 
   def new
-    validate_session
     @todo = Todo.new
     @user = User.find(params[:user_id])
   end
 
   def edit
-    validate_session
     @user = User.find(params[:user_id])
     @todo = @user.todos.find(params[:id])
     @users = User.all
   end
 
   def show
-    validate_session
     @user = User.find(params[:user_id])
     @todo = @user.todos.find(params[:id])
     if is_json
@@ -33,7 +31,6 @@ class TodosController < ApplicationController
   end
 
   def create
-    validate_session
     @user = User.find(params[:user_id])
     new_todo_params = todo_params
     new_todo_params['user_id'] = @user.id
@@ -46,7 +43,6 @@ class TodosController < ApplicationController
   end
 
   def update
-    validate_session
     @user = User.find(params[:user_id])
     @todo = @user.todos.find(params[:id])
     if @todo.update(todo_params)
@@ -58,7 +54,6 @@ class TodosController < ApplicationController
   end
 
   def destroy
-    validate_session
     user = User.find(params[:user_id])
     todo = user.todos.find(params[:id])
     todo.destroy
@@ -75,10 +70,14 @@ class TodosController < ApplicationController
       (request.headers["accept"].include? "application/json") || request.query_parameters["json"] == "true"
     end
 
-    def validate_session
-      # If the user parameter doesn't match the session user the logout
-      if session[:user_id].to_s != params[:user_id].to_s
-        redirect_to login_logout_path
+    def is_authorized
+      if !session[:user_id] || session[:user_id].to_s != params[:user_id].to_s
+        if is_json
+          render json: '{ "status": "401", message: "You are not authorized to perform the action." }', status: 401
+        else
+          flash[:notice] = "Please log in to continue"
+          redirect_to login_logout_path
+        end
       end
     end
 end

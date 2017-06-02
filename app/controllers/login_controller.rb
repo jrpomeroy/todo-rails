@@ -8,8 +8,9 @@ class LoginController < ApplicationController
   end
 
   def logout
-    # Clear the session and go back to the login page
-    reset_session
+    # Clear the current user from the session and go back to the login page
+    session[:user_id] = nil
+    flash.keep
     redirect_to login_index_path
   end
 
