@@ -16,11 +16,11 @@
     </div>
     <div>
       <dt>Created:</dt>
-      <dd><%= @todo.created_at %></dd>
+      <dd><%= @todo.created_at.to_datetime.strftime('%D %r UTC') %></dd>
     </div>
     <div>
       <dt>Updated:</dt>
-      <dd><%= @todo.updated_at %></dd>
+      <dd><%= @todo.updated_at.to_datetime.strftime('%D %r UTC') %></dd>
     </div>
   </dl>
 </div>

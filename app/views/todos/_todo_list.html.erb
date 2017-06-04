@@ -3,7 +3,7 @@
     <li class="<%= item_class %>">
       <%= todo.description %>
       <div class="todo-footer">
-        <span class="timestamp"><%= todo.created_at %></span>
+        <span class="timestamp"><%= todo.created_at.to_datetime.strftime('%D %r UTC') %></span>
         <%= link_to 'View', user_todo_path(@user, todo) %> -
         <%= link_to 'Edit', edit_user_todo_path(@user, todo) %> -
         <%= link_to 'Delete', user_todo_path(@user, todo),

@@ -37,6 +37,13 @@ nav {
   }
   .brand {
     font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .user {
+    display: flex;
+    div:last-child {
+      margin-left: 20px;
+    }
   }
 }
 
@@ -58,8 +65,9 @@ input[type="submit"],
   border: none;
   background-color: $button-color;
   color: $bg-color;
-  padding: 4px 6px;
+  padding: 6px 8px;
   font-size: 1rem;
+  cursor: pointer;
   &:hover, &:focus {
     text-decoration: none;
     background-color: darken($button-color, 10%);

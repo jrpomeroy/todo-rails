@@ -1,37 +1,37 @@
 class TodosController < ApplicationController
   before_action :is_authorized
+  before_action :set_user
 
   def index
-    @user = User.find(params[:user_id])
     if is_json
       render json: @user.todos
     else
+      @page = 'My ToDos'
       @todos_closed = @user.todos.select { |todo| todo.complete }
       @todos_open = @user.todos.select { |todo| !todo.complete }
     end
   end
 
   def new
+    @page = 'Create ToDo'
     @todo = Todo.new
-    @user = User.find(params[:user_id])
   end
 
   def edit
-    @user = User.find(params[:user_id])
+    @page = 'Update ToDo'
     @todo = @user.todos.find(params[:id])
     @users = User.all
   end
 
   def show
-    @user = User.find(params[:user_id])
     @todo = @user.todos.find(params[:id])
+    @page = "ToDo #{@todo.id}"
     if is_json
       render json: @todo
     end
   end
 
   def create
-    @user = User.find(params[:user_id])
     new_todo_params = todo_params
     new_todo_params['user_id'] = @user.id
     @todo = Todo.new(new_todo_params)
@@ -43,7 +43,6 @@ class TodosController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:user_id])
     @todo = @user.todos.find(params[:id])
     if @todo.update(todo_params)
       redirect_to user_todos_path(@user)
@@ -54,10 +53,9 @@ class TodosController < ApplicationController
   end
 
   def destroy
-    user = User.find(params[:user_id])
-    todo = user.todos.find(params[:id])
+    todo = @user.todos.find(params[:id])
     todo.destroy
-    redirect_to user_todos_path(user)
+    redirect_to user_todos_path(@user)
   end
 
   private
@@ -68,6 +66,10 @@ class TodosController < ApplicationController
     def is_json
       # Determine if JSON should be returned based on the accept header or query parameter
       (request.headers["accept"].include? "application/json") || request.query_parameters["json"] == "true"
+    end
+
+    def set_user
+      @user = User.find(params[:user_id])
     end
 
     def is_authorized

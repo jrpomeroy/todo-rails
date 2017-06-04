@@ -1,5 +1,6 @@
 class LoginController < ApplicationController
   def index
+    @page = 'Login'
     # If we already have a valid session then go to the todo list
     if session[:user_id]
       @user = User.find(session[:user_id])

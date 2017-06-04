@@ -1,9 +1,11 @@
 <nav>
-  <div class="brand">ToDo List</div>
-  <% if @user && @user.username %>
-    <div class="welcome">Welcome <%= @user.username %>!</div>
-  <% end %>
-  <% if session[:user_id] %>
-    <div><%= link_to 'Logout', login_logout_path %></div>
-  <% end %>
+  <div class="brand">ToDo Rails</div>
+  <div class="user">
+    <% if @user && @user.username %>
+      <div class="welcome">Welcome <%= @user.username %>!</div>
+    <% end %>
+    <% if session[:user_id] %>
+      <div><%= link_to 'Logout', login_logout_path %></div>
+    <% end %>
+  </div>
 </nav>
